@@ -31,5 +31,8 @@ out/
 ### VS Code ###
 .vscode/
 
-### Mac OS ###
+### DS Store ###
 .DS_Store
+._.DS_Store
+**/.DS_Store
+**/._.DS_Store
