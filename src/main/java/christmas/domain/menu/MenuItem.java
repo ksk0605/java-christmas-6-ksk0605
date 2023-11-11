@@ -29,6 +29,10 @@ public enum MenuItem {
         this.price = price;
     }
 
+    public static MenuItem fromName(String name) {
+        return MenuItem.valueOf(name);
+    }
+
     public MenuCategory getCategory() {
         return category;
     }
