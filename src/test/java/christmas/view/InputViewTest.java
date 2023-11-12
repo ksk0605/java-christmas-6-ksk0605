@@ -25,6 +25,15 @@ class InputViewTest {
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
+    @ParameterizedTest
+    @ValueSource(strings = {"타파스-1,제로콜라-1,,", ",,타파스-1,제로콜라-1", "타파스-1,,제로콜라-1"})
+    @DisplayName("예시와 다른 메뉴 형식은 입력할 수 없다.")
+    void readOrderWithInvalidInput(String input) {
+        setInput(input);
+        assertThatThrownBy(() -> InputView.readOrder())
+                .isInstanceOf(IllegalArgumentException.class);
+    }
+
     private void setInput(String input) {
         final byte[] buf = input.getBytes();
         System.setIn(new ByteArrayInputStream(buf));
