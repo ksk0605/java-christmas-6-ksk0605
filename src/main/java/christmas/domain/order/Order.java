@@ -22,4 +22,8 @@ public class Order {
     public int orderItemCounts() {
         return orderItems.getOrderItemCountAmount();
     }
+
+    public OrderItems getOrderItems() {
+        return orderItems;
+    }
 }
