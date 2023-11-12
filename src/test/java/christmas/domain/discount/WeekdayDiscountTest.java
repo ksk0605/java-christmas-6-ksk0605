@@ -10,7 +10,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class WeekdayDiscountTest {
-    WeekdayDiscount WeekdayDiscount = new WeekdayDiscount();
+    WeekdayDiscount weekdayDiscount = new WeekdayDiscount();
 
     @DisplayName("평일 할인 금액을 계산한다.")
     @ParameterizedTest
@@ -22,7 +22,7 @@ class WeekdayDiscountTest {
         Order order = new Order(orderItems, visitDate);
 
         // when
-        int discountAmount = WeekdayDiscount.calculateDiscountAmount(order);
+        int discountAmount = weekdayDiscount.calculateDiscountAmount(order);
 
         // then
         assertThat(discountAmount).isEqualTo(amount);
