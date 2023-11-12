@@ -51,4 +51,18 @@ class OutputViewTest {
         String capturedOutput = outputStreamCaptor.toString().trim();
         Assertions.assertThat(capturedOutput).isEqualTo("<할인 전 총주문 금액>\n142,000원");
     }
+
+    @Test
+    @DisplayName("증정 메뉴를 출력한다.")
+    void printEventItem() {
+        // then
+        Order order = new Order(orderItems, visitDate);
+
+        // when
+        OutputView.printEventItem(order);
+
+        // then
+        String capturedOutput = outputStreamCaptor.toString().trim();
+        Assertions.assertThat(capturedOutput).isEqualTo("<증정 메뉴>\n샴페인 1개");
+    }
 }
