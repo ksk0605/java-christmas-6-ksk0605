@@ -8,13 +8,17 @@ public class VisitDate {
         this.date = date;
     }
 
+    private static boolean isOutOfRangeInteger(int date) {
+        return date < 1 || date > 31;
+    }
+
     private void validateDate(int date) {
         if (isOutOfRangeInteger(date)) {
             throw new IllegalArgumentException();
         }
     }
 
-    private static boolean isOutOfRangeInteger(int date) {
-        return date < 1 || date > 31;
+    public int getDate() {
+        return date;
     }
 }
