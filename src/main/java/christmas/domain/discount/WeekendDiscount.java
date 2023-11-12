@@ -16,7 +16,7 @@ public class WeekendDiscount implements Discount {
     public int calculateDiscountAmount(Order order) {
         int visitDate = order.getVisitDate();
 
-        if (isNotWeekendDate(visitDate)) {
+        if (isNotSatisfiedMinimumAmount(order) || isNotWeekendDate(visitDate)) {
             return 0;
         }
 

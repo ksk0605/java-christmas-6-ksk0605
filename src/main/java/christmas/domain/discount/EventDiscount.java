@@ -10,7 +10,7 @@ public class EventDiscount implements Discount {
 
     @Override
     public int calculateDiscountAmount(Order order) {
-        if (isNotEligibleForEvent(order)) {
+        if (isNotSatisfiedMinimumAmount(order) || isNotEligibleForEvent(order)) {
             return 0;
         }
         return 25000; // TODO : static 상수 분리

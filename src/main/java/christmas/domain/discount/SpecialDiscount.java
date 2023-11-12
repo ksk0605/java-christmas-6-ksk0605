@@ -7,7 +7,7 @@ public class SpecialDiscount implements Discount {
     @Override
     public int calculateDiscountAmount(Order order) {
         int visitDate = order.getVisitDate();
-        if (isNotSpecialDiscountDay(visitDate)) {
+        if (isNotSatisfiedMinimumAmount(order) || isNotSpecialDiscountDay(visitDate)) {
             return 0;
         }
         return 1000; // TODO : static 상수 분리

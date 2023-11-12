@@ -15,7 +15,7 @@ public class ChristmasDiscount implements Discount {
     public int calculateDiscountAmount(Order order) {
         int visitDate = order.getVisitDate();
 
-        if (isNotDiscountDate(visitDate)) {
+        if (isNotSatisfiedMinimumAmount(order) || isNotDiscountDate(visitDate)) {
             return 0;
         }
 
