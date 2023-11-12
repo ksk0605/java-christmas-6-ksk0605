@@ -14,11 +14,13 @@ import java.io.PrintStream;
 class OutputViewTest {
     private static final int EXAMPLE_VISIT_DATE = 5;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
+    OrderItems orderItems;
     VisitDate visitDate;
 
     @BeforeEach
     public void setUp() {
         System.setOut(new PrintStream(outputStreamCaptor));
+        orderItems = new OrderItems("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1".split(","));
         visitDate = new VisitDate(EXAMPLE_VISIT_DATE);
     }
 
@@ -26,7 +28,6 @@ class OutputViewTest {
     @DisplayName("주문한 메뉴를 출력한다.")
     void printMenu() {
         // then
-        OrderItems orderItems = new OrderItems("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1".split(","));
         Order order = new Order(orderItems, visitDate);
 
         // when
@@ -35,5 +36,19 @@ class OutputViewTest {
         // then
         String capturedOutput = outputStreamCaptor.toString().trim();
         Assertions.assertThat(capturedOutput).isEqualTo("<주문 메뉴>\n" + "티본스테이크 1개\n바비큐립 1개\n초코케이크 2개\n제로콜라 1개");
+    }
+
+    @Test
+    @DisplayName("할인 전 총주문 금액을 출력한다.")
+    void printOrderAmount() {
+        // then
+        Order order = new Order(orderItems, visitDate);
+
+        // when
+        OutputView.printOrderAmount(order);
+
+        // then
+        String capturedOutput = outputStreamCaptor.toString().trim();
+        Assertions.assertThat(capturedOutput).isEqualTo("<할인 전 총주문 금액>\n142,000원");
     }
 }
