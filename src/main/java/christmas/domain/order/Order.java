@@ -11,8 +11,8 @@ public class Order {
         this.visitDate = visitDate;
     }
 
-    public OrderItems getOrderItems() {
-        return orderItems;
+    public int calculateOrderAmount() {
+        return orderItems.calculateOrderAmount();
     }
 
     public int getVisitDate() {

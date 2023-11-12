@@ -61,6 +61,14 @@ public class OrderItems {
         return amount;
     }
 
+    public int calculateOrderAmount() {
+        int amount = 0;
+        for (OrderItem orderItem : items) {
+            amount += orderItem.getMenuItem().getPrice() * orderItem.getMenuCount();
+        }
+        return amount;
+    }
+
     private void validateAndAddItems(String[] values) {
         Set<MenuItem> seenItems = new HashSet<>();
 
