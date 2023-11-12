@@ -53,6 +53,14 @@ public class OrderItems {
         return OrderItem.from(menuItem, menuCount);
     }
 
+    public int getOrderItemCountAmount() {
+        int amount = 0;
+        for (OrderItem orderItem : items) {
+            amount += orderItem.getMenuCount();
+        }
+        return amount;
+    }
+
     private void validateAndAddItems(String[] values) {
         Set<MenuItem> seenItems = new HashSet<>();
 

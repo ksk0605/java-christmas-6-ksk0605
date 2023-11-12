@@ -18,4 +18,8 @@ public class Order {
     public int getVisitDate() {
         return visitDate.getDate();
     }
+
+    public int orderItemCounts() {
+        return orderItems.getOrderItemCountAmount();
+    }
 }

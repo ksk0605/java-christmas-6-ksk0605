@@ -29,4 +29,8 @@ public class OrderItem {
     public MenuItem getMenuItem() {
         return menuItem;
     }
+
+    public int getMenuCount() {
+        return menuCount;
+    }
 }
