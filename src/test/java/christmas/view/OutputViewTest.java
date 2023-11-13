@@ -118,4 +118,25 @@ class OutputViewTest {
         String capturedOutput = outputStreamCaptor.toString().trim();
         Assertions.assertThat(capturedOutput).isEqualTo(strings[1]);
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1/" +
+            "<할인 후 예상 결제 금액>\n135,754원",
+            "타파스-1,제로콜라-1/" +
+                    "<할인 후 예상 결제 금액>\n8,500원"})
+    @DisplayName("할인 후 예상 결제 금액을 출력한다.")
+    void printExpectedPaymentAmount(String value) {
+        // given
+        // strings[0] 은 사용자 입력 strings[1] 은 출력결과
+        String[] strings = value.split("/");
+        OrderItems testOrderItems = new OrderItems(strings[0].split(","));
+        Order order = new Order(testOrderItems, visitDate);
+
+        // when
+        OutputView.printExpectedPaymentAmount(discounts, order);
+
+        // then
+        String capturedOutput = outputStreamCaptor.toString().trim();
+        Assertions.assertThat(capturedOutput).isEqualTo(strings[1]);
+    }
 }
