@@ -45,4 +45,12 @@ class OrderItemsTest {
                 new OrderItems(new String[]{"제로콜라-2", "레드와인-1"})
         ).isInstanceOf(IllegalArgumentException.class);
     }
+
+    @Test
+    @DisplayName("음료만 주문할 수 없다.")
+    void createOrderItemsWithOverMaxItemCounts() {
+        assertThatThrownBy(() ->
+                new OrderItems(new String[]{"제로콜라-20", "레드와인-1"})
+        ).isInstanceOf(IllegalArgumentException.class);
+    }
 }
