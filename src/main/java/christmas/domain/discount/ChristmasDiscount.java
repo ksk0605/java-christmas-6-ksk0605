@@ -21,4 +21,9 @@ public class ChristmasDiscount implements Discount {
 
         return calculateAmount(visitDate);
     }
+
+    @Override
+    public String getDiscountName() {
+        return "크리스마스 디데이 할인";
+    }
 }

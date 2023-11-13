@@ -15,4 +15,9 @@ public class EventDiscount implements Discount {
         }
         return 25000; // TODO : static 상수 분리
     }
+
+    @Override
+    public String getDiscountName() {
+        return "증정 이벤트";
+    }
 }

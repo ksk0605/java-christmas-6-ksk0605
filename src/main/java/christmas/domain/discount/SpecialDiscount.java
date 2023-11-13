@@ -13,6 +13,11 @@ public class SpecialDiscount implements Discount {
         return 1000; // TODO : static 상수 분리
     }
 
+    @Override
+    public String getDiscountName() {
+        return "특별 할인";
+    }
+
     private static boolean isNotSpecialDiscountDay(int visitDate) {
         return !SpecialDiscountDay.isSpecialDiscountDay(visitDate);
     }
