@@ -32,7 +32,7 @@ class OutputViewTest {
     @Test
     @DisplayName("주문한 메뉴를 출력한다.")
     void printMenu() {
-        // then
+        // given
         Order order = new Order(orderItems, visitDate);
 
         // when
@@ -46,7 +46,7 @@ class OutputViewTest {
     @Test
     @DisplayName("할인 전 총주문 금액을 출력한다.")
     void printOrderAmount() {
-        // then
+        // given
         Order order = new Order(orderItems, visitDate);
 
         // when
@@ -60,7 +60,7 @@ class OutputViewTest {
     @Test // TODO : 없음 테스트
     @DisplayName("증정 메뉴를 출력한다.")
     void printEventItem() {
-        // then TODO : given으로 수정
+        // given
         Order order = new Order(orderItems, visitDate);
 
         // when
@@ -139,7 +139,7 @@ class OutputViewTest {
             "<12월 이벤트 배지>\n산타",
             "타파스-1,제로콜라-1/" +
                     "<12월 이벤트 배지>\n없음"})
-    @DisplayName("할인 후 예상 결제 금액을 출력한다.")
+    @DisplayName("12월 이벤트 배지를 출력한다.")
     void printEventBadge(String value) {
         // given
         // strings[0] 은 사용자 입력 strings[1] 은 출력결과
