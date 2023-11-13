@@ -100,21 +100,29 @@ public class OrderItems {
     public int getDessertOrderItemCountAmount() {
         int amount = 0;
         for (OrderItem orderItem : items) {
-            if (orderItem.getCategory().equals(MenuCategory.디저트)) { // TODO: OrderItem 에 로직 넣기
+            if (isDessert(orderItem)) {
                 amount += orderItem.getMenuCount();
             }
         }
         return amount;
     }
 
+    private static boolean isDessert(OrderItem orderItem) {
+        return orderItem.getCategory().equals(MenuCategory.디저트);
+    }
+
     public int getMainOrderItemCountAmount() {
         int amount = 0;
         for (OrderItem orderItem : items) {
-            if (orderItem.getCategory().equals(MenuCategory.메인)) {
+            if (isMain(orderItem)) {
                 amount += orderItem.getMenuCount();
             }
         }
         return amount;
+    }
+
+    private static boolean isMain(OrderItem orderItem) {
+        return orderItem.getCategory().equals(MenuCategory.메인);
     }
 
     public int calculateOrderAmount() {
