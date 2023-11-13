@@ -49,7 +49,7 @@ public class OrderItems {
         return getOrderItemCountAmount() > 20;
     }
 
-    private boolean isNotAllowedInput(String[] parts) {
+    private boolean isInvalidMenuFormat(String[] parts) {
         return parts.length != 2;
     }
 
@@ -69,15 +69,15 @@ public class OrderItems {
         return value.split(",");
     }
 
-    private void validateNotAllowedInput(String[] parts) {
-        if (isNotAllowedInput(parts)) {
+    private void validateMenuFormat(String[] parts) {
+        if (isInvalidMenuFormat(parts)) {
             throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
     }
 
     private void validateDuplicateItem(Set<MenuItem> seenItems, MenuItem menuItem) {
         if (hasDuplicateItems(seenItems, menuItem)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException(); // TODO 메시지 추가
         }
     }
 
@@ -129,13 +129,12 @@ public class OrderItems {
         Set<MenuItem> seenItems = new HashSet<>();
         for (String value : values) {
             String[] parts = splitByDash(value);
-            validateNotAllowedInput(parts);
+            validateMenuFormat(parts);
 
             String menuName = getMenuName(parts);
-
             validateMenuCount(parts);
-            int menuCount = getMenuCount(parts);
 
+            int menuCount = getMenuCount(parts);
             MenuItem menuItem = MenuItem.fromName(menuName);
             validateDuplicateItem(seenItems, menuItem);
 
