@@ -1,21 +1,21 @@
 package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
+import christmas.domain.VisitDate;
 
 import static christmas.view.ViewMessages.*;
 
 public class InputView {
-    public static int readDate() {
+    public static VisitDate readDate() {
         System.out.println(WELCOME_MESSAGE);
         System.out.println(ENTER_VISIT_DATE_PROMPT);
-        String input = getUserInput();
-        validateInputDate(input);
-        return toInt(input);
+        String input = createUserInput();
+        return new VisitDate(input);
     }
 
     public static String[] readOrder() {
         System.out.println(ORDER_MENU_PROMPT);
-        String input = getUserInput();
+        String input = createUserInput();
         validateInputOrder(input);
         return split(input);
     }
@@ -44,26 +44,7 @@ public class InputView {
         return false;
     }
 
-    private static String getUserInput() {
+    private static String createUserInput() {
         return Console.readLine();
-    }
-
-    private static int toInt(String input) {
-        return Integer.parseInt(input);
-    }
-
-    private static void validateInputDate(String input) {
-        if (isNotInteger(input)) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
-        }
-    }
-
-    private static boolean isNotInteger(String input) {
-        try {
-            toInt(input);
-            return false;
-        } catch (NumberFormatException exception) {
-            return true;
-        }
     }
 }

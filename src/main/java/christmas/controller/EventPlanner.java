@@ -44,8 +44,7 @@ public class EventPlanner {
     private static VisitDate createVisitDate() {
         while (true) {
             try {
-                int date = InputView.readDate();
-                return new VisitDate(date);
+                return InputView.readDate();
             } catch (IllegalArgumentException exception) {
                 System.out.println(exception.getMessage());
             }
