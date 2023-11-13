@@ -11,9 +11,10 @@ import java.util.Set;
 public class OrderItems {
     private final List<OrderItem> items;
 
-    public OrderItems(String[] values) {
+    public OrderItems(String input) {
         items = new ArrayList<>();
-        validateAndAddItems(values);
+        validateInput(input);
+        validateAndAddItems(splitByComma(input));
         validateItemCounts();
         validateCategory();
     }
@@ -24,39 +25,63 @@ public class OrderItems {
         }
     }
 
+    private void validateInput(String input) {
+        String[] values = splitByComma(input);
+        if (hasDuplicateComma(input) || isInvalidInputOrder(values)) {
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
+    }
+
+    private boolean hasDuplicateComma(String input) {
+        return input.contains(",,");
+    }
+
+    private boolean isInvalidInputOrder(String[] values) {
+        for (String value : values) {
+            if (value.isEmpty()) {
+                return true;
+            }
+        }
+        return false;
+    }
+
     private boolean exceedMaximumCount() {
         return getOrderItemCountAmount() > 20;
     }
 
-    private static boolean isNotAllowedInput(String[] parts) {
+    private boolean isNotAllowedInput(String[] parts) {
         return parts.length != 2;
     }
 
-    private static String getMenuName(String[] parts) {
+    private String getMenuName(String[] parts) {
         return parts[0].trim();
     }
 
-    private static int getMenuCount(String[] parts) {
+    private int getMenuCount(String[] parts) {
         return Integer.parseInt(parts[1].trim());
     }
 
-    private static String[] split(String value) {
+    private String[] splitByDash(String value) {
         return value.split("-");
     }
 
-    private static void validateNotAllowedInput(String[] parts) {
+    private String[] splitByComma(String value) {
+        return value.split(",");
+    }
+
+    private void validateNotAllowedInput(String[] parts) {
         if (isNotAllowedInput(parts)) {
             throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
     }
 
-    private static void validateDuplicateItem(Set<MenuItem> seenItems, MenuItem menuItem) {
+    private void validateDuplicateItem(Set<MenuItem> seenItems, MenuItem menuItem) {
         if (hasDuplicateItems(seenItems, menuItem)) {
             throw new IllegalArgumentException();
         }
     }
 
-    private static boolean hasDuplicateItems(Set<MenuItem> seenItems, MenuItem menuItem) {
+    private boolean hasDuplicateItems(Set<MenuItem> seenItems, MenuItem menuItem) {
         return !seenItems.add(menuItem);
     }
 
@@ -102,10 +127,8 @@ public class OrderItems {
 
     private void validateAndAddItems(String[] values) { // TODO : 라인 수 줄이기
         Set<MenuItem> seenItems = new HashSet<>();
-
         for (String value : values) {
-            String[] parts = split(value);
-
+            String[] parts = splitByDash(value);
             validateNotAllowedInput(parts);
 
             String menuName = getMenuName(parts);

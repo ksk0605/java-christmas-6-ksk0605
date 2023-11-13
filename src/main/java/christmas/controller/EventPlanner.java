@@ -31,9 +31,7 @@ public class EventPlanner {
     private static Order createOrder(VisitDate visitDate) {
         while (true) {
             try {
-                String[] orders = InputView.readOrder();
-                OrderItems orderItems = new OrderItems(orders);
-
+                OrderItems orderItems = InputView.readOrderItems();
                 return new Order(orderItems, visitDate);
             } catch (IllegalArgumentException exception) {
                 System.out.println(exception.getMessage());

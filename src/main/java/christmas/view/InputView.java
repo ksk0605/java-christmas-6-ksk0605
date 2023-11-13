@@ -2,6 +2,7 @@ package christmas.view;
 
 import camp.nextstep.edu.missionutils.Console;
 import christmas.domain.VisitDate;
+import christmas.domain.order.OrderItems;
 
 import static christmas.view.ViewMessages.*;
 
@@ -13,35 +14,10 @@ public class InputView {
         return new VisitDate(input);
     }
 
-    public static String[] readOrder() {
+    public static OrderItems readOrderItems() {
         System.out.println(ORDER_MENU_PROMPT);
         String input = createUserInput();
-        validateInputOrder(input);
-        return split(input);
-    }
-
-    private static String[] split(String input) {
-        return input.split(",");
-    }
-
-    private static void validateInputOrder(String input) {
-        String[] values = split(input);
-        if (hasDuplicateComma(input) || isInvalidInputOrder(values)) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
-        }
-    }
-
-    private static boolean hasDuplicateComma(String input) {
-        return input.contains(",,");
-    }
-
-    private static boolean isInvalidInputOrder(String[] values) {
-        for (String value : values) {
-            if (value.isEmpty()) {
-                return true;
-            }
-        }
-        return false;
+        return new OrderItems(input);
     }
 
     private static String createUserInput() {
