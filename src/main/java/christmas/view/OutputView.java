@@ -1,8 +1,8 @@
 package christmas.view;
 
-import christmas.domain.EventBadge;
 import christmas.domain.discount.Discount;
 import christmas.domain.discount.Discounts;
+import christmas.domain.event.EventBadge;
 import christmas.domain.order.Order;
 import christmas.domain.order.OrderItem;
 import christmas.domain.order.OrderItems;
