@@ -139,4 +139,25 @@ class OutputViewTest {
         String capturedOutput = outputStreamCaptor.toString().trim();
         Assertions.assertThat(capturedOutput).isEqualTo(strings[1]);
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1/" +
+            "<12월 이벤트 배지>\n산타",
+            "타파스-1,제로콜라-1/" +
+                    "<12월 이벤트 배지>\n없음"})
+    @DisplayName("할인 후 예상 결제 금액을 출력한다.")
+    void printEventBadge(String value) {
+        // given
+        // strings[0] 은 사용자 입력 strings[1] 은 출력결과
+        String[] strings = value.split("/");
+        OrderItems testOrderItems = new OrderItems(strings[0].split(","));
+        Order order = new Order(testOrderItems, visitDate);
+
+        // when
+        OutputView.printEventBadge(discounts, order);
+
+        // then
+        String capturedOutput = outputStreamCaptor.toString().trim();
+        Assertions.assertThat(capturedOutput).isEqualTo(strings[1]);
+    }
 }
