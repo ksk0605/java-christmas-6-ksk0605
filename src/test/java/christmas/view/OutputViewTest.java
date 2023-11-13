@@ -1,7 +1,7 @@
 package christmas.view;
 
 import christmas.domain.VisitDate;
-import christmas.domain.discount.*;
+import christmas.domain.discount.Discounts;
 import christmas.domain.order.Order;
 import christmas.domain.order.OrderItems;
 import org.assertj.core.api.Assertions;
@@ -13,26 +13,20 @@ import org.junit.jupiter.params.provider.ValueSource;
 
 import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
-import java.util.ArrayList;
-import java.util.List;
 
 class OutputViewTest {
     private static final int EXAMPLE_VISIT_DATE = 3;
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
     OrderItems orderItems;
     VisitDate visitDate;
-    List<Discount> discounts = new ArrayList<>();
+    Discounts discounts;
 
     @BeforeEach
     public void setUp() {
         System.setOut(new PrintStream(outputStreamCaptor));
         orderItems = new OrderItems("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1".split(","));
         visitDate = new VisitDate(EXAMPLE_VISIT_DATE);
-        discounts.add(new ChristmasDiscount());
-        discounts.add(new WeekdayDiscount());
-        discounts.add(new WeekendDiscount());
-        discounts.add(new SpecialDiscount());
-        discounts.add(new EventDiscount());
+        discounts = new Discounts();
     }
 
     @Test
@@ -82,7 +76,7 @@ class OutputViewTest {
             "<혜택 내역>\n크리스마스 디데이 할인: -1,200원\n평일 할인: -4,046원\n특별 할인: -1,000원\n증정 이벤트: -25,000원",
             "타파스-1,제로콜라-1/" +
                     "<혜택 내역>\n없음"})
-    @DisplayName("증정 메뉴를 출력한다.")
+    @DisplayName("혜택 내역를 출력한다.")
     void printDiscountDetails(String value) {
         // given
         // strings[0] 은 사용자 입력 strings[1] 은 출력결과

@@ -2,13 +2,12 @@ package christmas.view;
 
 import christmas.domain.EventBadge;
 import christmas.domain.discount.Discount;
-import christmas.domain.discount.EventDiscount;
+import christmas.domain.discount.Discounts;
 import christmas.domain.order.Order;
 import christmas.domain.order.OrderItem;
 import christmas.domain.order.OrderItems;
 
 import java.text.NumberFormat;
-import java.util.List;
 
 public class OutputView { // TODO : 리팩토링
     public static void printMenu(Order order) {
@@ -29,15 +28,15 @@ public class OutputView { // TODO : 리팩토링
         System.out.println(eventItem);
     }
 
-    public static void printDiscountDetails(List<Discount> discounts, Order order) { // TODO : Discounts 클래스
+    public static void printDiscountDetails(Discounts discounts, Order order) {
         System.out.println("\n<혜택 내역>");
 
-        if (hasNoDiscount(discounts, order)) {
+        if (discounts.allDiscountsZero(order)) {
             System.out.println("없음");
             return;
         }
 
-        for (Discount discount : discounts) {
+        for (Discount discount : discounts.getDiscounts()) {
             int discountAmount = discount.calculateDiscountAmount(order);
             if (discountAmount == 0) {
                 continue;
@@ -46,55 +45,31 @@ public class OutputView { // TODO : 리팩토링
         }
     }
 
-    public static void printDiscountAmount(List<Discount> discounts, Order order) {
+    public static void printDiscountAmount(Discounts discounts, Order order) {
         System.out.println("\n<총혜택 금액>");
-        int discountAmount = calculateAllDiscountAmount(discounts, order);
-        System.out.println(formatPrizeAmount(discountAmount) + "원");
+        int discountAmount = discounts.sumAllDiscounts(order);
+        if (discountAmount == 0) {
+            System.out.println("0원");
+            return;
+        }
+        System.out.println("-" + formatPrizeAmount(discountAmount) + "원");
     }
 
-    public static void printExpectedPaymentAmount(List<Discount> discounts, Order order) {
+    public static void printExpectedPaymentAmount(Discounts discounts, Order order) {
         System.out.println("\n<할인 후 예상 결제 금액>");
-        int expectedPaymentAmount = order.calculateOrderAmount() + calculateAllDiscountAmountExceptEventDiscount(discounts, order);
+        int expectedPaymentAmount = order.calculateOrderAmount() + discounts.sumAllDiscountAmountExcludingEventDiscount(order);
         System.out.println(formatPrizeAmount(expectedPaymentAmount) + "원");
     }
 
-    public static void printEventBadge(List<Discount> discounts, Order order) {
+    public static void printEventBadge(Discounts discounts, Order order) {
         System.out.println("\n<12월 이벤트 배지>");
-        int discountAmount = calculateAllDiscountAmount(discounts, order);
-        EventBadge eventBadge = EventBadge.getBadgeForAmount(discountAmount * -1); // TODO : 리팩토링 필요
+        int discountAmount = discounts.sumAllDiscounts(order);
+        EventBadge eventBadge = EventBadge.getBadgeForAmount(discountAmount);
         if (eventBadge == null) {
             System.out.println("없음");
             return;
         }
         System.out.println(eventBadge);
-    }
-
-    private static int calculateAllDiscountAmount(List<Discount> discounts, Order order) {
-        int discountAmount = 0;
-        for (Discount discount : discounts) {
-            discountAmount -= discount.calculateDiscountAmount(order);
-        }
-        return discountAmount;
-    }
-
-    private static int calculateAllDiscountAmountExceptEventDiscount(List<Discount> discounts, Order order) {
-        int discountAmount = 0;
-        for (Discount discount : discounts) {
-            if (isNotEventDiscount(discount)) {
-                discountAmount -= discount.calculateDiscountAmount(order);
-            }
-        }
-        return discountAmount;
-    }
-
-    private static boolean isNotEventDiscount(Discount discount) {
-        return !(discount instanceof EventDiscount);
-    }
-
-    private static boolean hasNoDiscount(List<Discount> discounts, Order order) {
-        boolean hasDiscount = discounts.stream()
-                .anyMatch(discount -> discount.calculateDiscountAmount(order) > 0);
-        return !hasDiscount;
     }
 
     private static String createEventItem(Order order) { // TODO : 이벤트 아이템 enum으로 리팩토링

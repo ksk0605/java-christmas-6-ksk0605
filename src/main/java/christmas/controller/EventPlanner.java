@@ -1,18 +1,16 @@
 package christmas.controller;
 
 import christmas.domain.VisitDate;
-import christmas.domain.discount.Discount;
+import christmas.domain.discount.Discounts;
 import christmas.domain.order.Order;
 import christmas.domain.order.OrderItems;
 import christmas.view.InputView;
 import christmas.view.OutputView;
 
-import java.util.List;
-
 public class EventPlanner {
-    private final List<Discount> discounts;
+    private final Discounts discounts;
 
-    public EventPlanner(List<Discount> discounts) {
+    public EventPlanner(Discounts discounts) {
         this.discounts = discounts;
     }
 
