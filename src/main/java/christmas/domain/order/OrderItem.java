@@ -1,5 +1,6 @@
 package christmas.domain.order;
 
+import christmas.domain.menu.MenuCategory;
 import christmas.domain.menu.MenuItem;
 
 public class OrderItem {
@@ -32,5 +33,9 @@ public class OrderItem {
 
     public int getMenuCount() {
         return menuCount;
+    }
+
+    public MenuCategory getCategory() {
+        return menuItem.getCategory();
     }
 }

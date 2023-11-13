@@ -5,11 +5,11 @@ import christmas.domain.order.Order;
 public class WeekendDiscount implements Discount {
 
     private static boolean isNotWeekendDate(int visitDate) {
-        return visitDate % 7 == 1 || visitDate % 7 == 2;
+        return !(visitDate % 7 == 1 || visitDate % 7 == 2);
     }
 
     private static int calculateAmount(Order order) {
-        return 2023 * order.orderItemCounts();
+        return 2023 * order.getMainOrderItemCountAmount();
     }
 
     @Override
@@ -21,5 +21,10 @@ public class WeekendDiscount implements Discount {
         }
 
         return calculateAmount(order);
+    }
+
+    @Override
+    public String getDiscountName() {
+        return "주말 할인";
     }
 }

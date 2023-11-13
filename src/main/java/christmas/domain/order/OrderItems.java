@@ -61,6 +61,26 @@ public class OrderItems {
         return amount;
     }
 
+    public int getDessertOrderItemCountAmount() {
+        int amount = 0;
+        for (OrderItem orderItem : items) {
+            if (orderItem.getCategory().equals(MenuCategory.디저트)) { // TODO: OrderItem 에 로직 넣기
+                amount += orderItem.getMenuCount();
+            }
+        }
+        return amount;
+    }
+
+    public int getMainOrderItemCountAmount() {
+        int amount = 0;
+        for (OrderItem orderItem : items) {
+            if (orderItem.getCategory().equals(MenuCategory.디저트)) {
+                amount += orderItem.getMenuCount();
+            }
+        }
+        return amount;
+    }
+
     public int calculateOrderAmount() {
         int amount = 0;
         for (OrderItem orderItem : items) {
