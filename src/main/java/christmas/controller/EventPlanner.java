@@ -19,6 +19,7 @@ public class EventPlanner {
 
         Order order = createOrder(visitDate);
 
+        OutputView.printEventHeader(visitDate);
         OutputView.printMenu(order);
         OutputView.printOrderAmount(order);
         OutputView.printEventItem(order);
