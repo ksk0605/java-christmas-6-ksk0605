@@ -110,7 +110,7 @@ public class OrderItems {
     public int getMainOrderItemCountAmount() {
         int amount = 0;
         for (OrderItem orderItem : items) {
-            if (orderItem.getCategory().equals(MenuCategory.디저트)) {
+            if (orderItem.getCategory().equals(MenuCategory.메인)) {
                 amount += orderItem.getMenuCount();
             }
         }
