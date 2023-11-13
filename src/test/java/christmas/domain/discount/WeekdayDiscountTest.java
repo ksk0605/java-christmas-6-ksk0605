@@ -14,11 +14,11 @@ class WeekdayDiscountTest {
 
     @DisplayName("평일 할인 금액을 계산한다.")
     @ParameterizedTest
-    @CsvSource(value = {"1,6069", "9,6069", "19, 0"})
-    void calculateDiscountAmount(int date, int amount) {
+    @CsvSource(value = {"샴페인-1,초코케이크-2:1:0", "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1:3:4046"}, delimiter = ':')
+    void calculateDiscountAmount(String input, int date, int amount) {
         // given
         VisitDate visitDate = new VisitDate(date);
-        OrderItems orderItems = new OrderItems(new String[]{"샴페인-1", "초코케이크-2"});
+        OrderItems orderItems = new OrderItems(input.split(","));
         Order order = new Order(orderItems, visitDate);
 
         // when
