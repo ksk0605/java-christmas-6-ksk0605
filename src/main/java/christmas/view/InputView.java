@@ -58,9 +58,9 @@ public class InputView {
     private static boolean isNotInteger(String input) {
         try {
             toInt(input);
-            return true;
-        } catch (NumberFormatException exception) {
             return false;
+        } catch (NumberFormatException exception) {
+            return true;
         }
     }
 }
