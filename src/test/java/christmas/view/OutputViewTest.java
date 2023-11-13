@@ -15,7 +15,7 @@ import java.io.ByteArrayOutputStream;
 import java.io.PrintStream;
 
 class OutputViewTest {
-    private static final int EXAMPLE_VISIT_DATE = 3;
+    private static final String EXAMPLE_VISIT_DATE = "3";
     private final ByteArrayOutputStream outputStreamCaptor = new ByteArrayOutputStream();
     OrderItems orderItems;
     VisitDate visitDate;

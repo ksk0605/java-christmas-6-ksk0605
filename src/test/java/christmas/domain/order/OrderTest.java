@@ -9,11 +9,12 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class OrderTest {
+    private static final String EXAMPLE_VISIT_DATE = "4";
     VisitDate visitDate;
 
     @BeforeEach
     void setUp() {
-        visitDate = new VisitDate(4);
+        visitDate = new VisitDate(EXAMPLE_VISIT_DATE);
     }
 
     @ParameterizedTest

@@ -11,7 +11,7 @@ import org.junit.jupiter.params.provider.CsvSource;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class EventDiscountTest {
-    private static final int EXAMPLE_VISIT_DATE = 5;
+    private static final String EXAMPLE_VISIT_DATE = "5";
     EventDiscount eventDiscount;
     VisitDate visitDate;
 

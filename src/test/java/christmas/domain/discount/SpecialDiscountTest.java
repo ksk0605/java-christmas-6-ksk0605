@@ -23,7 +23,7 @@ class SpecialDiscountTest {
     @DisplayName("특별 할인 금액을 계산한다.")
     @ParameterizedTest
     @CsvSource(value = {"3:1000", "5:0"}, delimiter = ':')
-    void calculateDiscountAmount(int date, int amount) {
+    void calculateDiscountAmount(String date, int amount) {
         // given
         VisitDate visitDate = new VisitDate(date);
         Order order = new Order(orderItems, visitDate);

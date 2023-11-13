@@ -13,7 +13,7 @@ import java.util.List;
 import static org.assertj.core.api.Assertions.assertThat;
 
 class DiscountTest {
-    private static final int EXAMPLE_VISIT_DATE = 5;
+    private static final String EXAMPLE_VISIT_DATE = "5";
     private static final String[] EXAMPLE_ORDER_ITEM = "타파스-1,제로콜라-1".split(",");
     List<Discount> discounts;
     VisitDate visitDate;

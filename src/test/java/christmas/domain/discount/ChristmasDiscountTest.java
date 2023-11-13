@@ -15,7 +15,7 @@ class ChristmasDiscountTest {
     @DisplayName("크리스마스 디데이 할인 금액을 계산한다.")
     @ParameterizedTest
     @CsvSource(value = {"1,1000", "15,2400", "25,3400"})
-    void calculateDiscountAmount(int date, int amount) {
+    void calculateDiscountAmount(String date, int amount) {
         // given
         VisitDate visitDate = new VisitDate(date);
         OrderItems orderItems = new OrderItems(new String[]{"샴페인-1", "초코케이크-2"});
