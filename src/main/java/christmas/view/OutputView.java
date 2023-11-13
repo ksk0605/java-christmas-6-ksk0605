@@ -1,5 +1,6 @@
 package christmas.view;
 
+import christmas.domain.EventBadge;
 import christmas.domain.discount.Discount;
 import christmas.domain.discount.EventDiscount;
 import christmas.domain.order.Order;
@@ -55,6 +56,17 @@ public class OutputView { // TODO : 리팩토링
         System.out.println("\n<할인 후 예상 결제 금액>");
         int expectedPaymentAmount = order.calculateOrderAmount() + calculateAllDiscountAmountExceptEventDiscount(discounts, order);
         System.out.println(formatPrizeAmount(expectedPaymentAmount) + "원");
+    }
+
+    public static void printEventBadge(List<Discount> discounts, Order order) {
+        System.out.println("\n<12월 이벤트 배지>");
+        int discountAmount = calculateAllDiscountAmount(discounts, order);
+        EventBadge eventBadge = EventBadge.getBadgeForAmount(discountAmount * -1); // TODO : 리팩토링 필요
+        if (eventBadge == null) {
+            System.out.println("없음");
+            return;
+        }
+        System.out.println(eventBadge);
     }
 
     private static int calculateAllDiscountAmount(List<Discount> discounts, Order order) {
