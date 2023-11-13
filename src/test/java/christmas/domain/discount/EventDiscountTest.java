@@ -26,7 +26,7 @@ class EventDiscountTest {
     @CsvSource(value = {"티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1:25000", "타파스-1,제로콜라-1:0"}, delimiter = ':')
     void calculateDiscountAmount(String orderInput, int amount) {
         // given
-        OrderItems orderItems = new OrderItems(orderInput.split(","));
+        OrderItems orderItems = new OrderItems(orderInput);
         Order order = new Order(orderItems, visitDate);
 
         // when

@@ -24,7 +24,7 @@ class OutputViewTest {
     @BeforeEach
     public void setUp() {
         System.setOut(new PrintStream(outputStreamCaptor));
-        orderItems = new OrderItems("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1".split(","));
+        orderItems = new OrderItems("티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
         visitDate = new VisitDate(EXAMPLE_VISIT_DATE);
         discounts = new Discounts();
     }
@@ -81,7 +81,7 @@ class OutputViewTest {
         // given
         // strings[0] 은 사용자 입력 strings[1] 은 출력결과
         String[] strings = value.split("/");
-        OrderItems testOrderItems = new OrderItems(strings[0].split(","));
+        OrderItems testOrderItems = new OrderItems(strings[0]);
         Order order = new Order(testOrderItems, visitDate);
 
         // when
@@ -102,7 +102,7 @@ class OutputViewTest {
         // given
         // strings[0] 은 사용자 입력 strings[1] 은 출력결과
         String[] strings = value.split("/");
-        OrderItems testOrderItems = new OrderItems(strings[0].split(","));
+        OrderItems testOrderItems = new OrderItems(strings[0]);
         Order order = new Order(testOrderItems, visitDate);
 
         // when
@@ -123,7 +123,7 @@ class OutputViewTest {
         // given
         // strings[0] 은 사용자 입력 strings[1] 은 출력결과
         String[] strings = value.split("/");
-        OrderItems testOrderItems = new OrderItems(strings[0].split(","));
+        OrderItems testOrderItems = new OrderItems(strings[0]);
         Order order = new Order(testOrderItems, visitDate);
 
         // when
@@ -144,7 +144,7 @@ class OutputViewTest {
         // given
         // strings[0] 은 사용자 입력 strings[1] 은 출력결과
         String[] strings = value.split("/");
-        OrderItems testOrderItems = new OrderItems(strings[0].split(","));
+        OrderItems testOrderItems = new OrderItems(strings[0]);
         Order order = new Order(testOrderItems, visitDate);
 
         // when

@@ -22,7 +22,7 @@ class OrderTest {
     @DisplayName("총 주문 금액을 계산한다.")
     void calculateOrderAmount(String orderInput, int amount) {
         // given
-        OrderItems orderItems = new OrderItems(orderInput.split(","));
+        OrderItems orderItems = new OrderItems(orderInput);
         Order order = new Order(orderItems, visitDate);
 
         // when

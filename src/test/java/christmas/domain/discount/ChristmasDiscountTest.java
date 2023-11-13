@@ -18,7 +18,7 @@ class ChristmasDiscountTest {
     void calculateDiscountAmount(String date, int amount) {
         // given
         VisitDate visitDate = new VisitDate(date);
-        OrderItems orderItems = new OrderItems(new String[]{"샴페인-1", "초코케이크-2"});
+        OrderItems orderItems = new OrderItems("샴페인-1,초코케이크-2");
         Order order = new Order(orderItems, visitDate);
 
         // when

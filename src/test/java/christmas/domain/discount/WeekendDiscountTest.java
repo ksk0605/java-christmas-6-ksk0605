@@ -18,7 +18,7 @@ class WeekendDiscountTest {
     void calculateDiscountAmount(String input, String date, int amount) {
         // given
         VisitDate visitDate = new VisitDate(date);
-        OrderItems orderItems = new OrderItems(input.split(","));
+        OrderItems orderItems = new OrderItems(input);
         Order order = new Order(orderItems, visitDate);
 
         // when

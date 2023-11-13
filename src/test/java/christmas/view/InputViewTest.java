@@ -30,7 +30,7 @@ class InputViewTest {
     @DisplayName("예시와 다른 메뉴 형식은 입력할 수 없다.")
     void readOrderWithInvalidInput(String input) {
         setInput(input);
-        assertThatThrownBy(() -> InputView.readOrder())
+        assertThatThrownBy(() -> InputView.readOrderItems())
                 .isInstanceOf(IllegalArgumentException.class);
     }
 
