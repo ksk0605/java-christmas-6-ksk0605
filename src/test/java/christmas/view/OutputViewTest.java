@@ -97,4 +97,25 @@ class OutputViewTest {
         String capturedOutput = outputStreamCaptor.toString().trim();
         Assertions.assertThat(capturedOutput).isEqualTo(strings[1]);
     }
+
+    @ParameterizedTest
+    @ValueSource(strings = {"티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1/" +
+            "<총혜택 금액>\n-31,246원",
+            "타파스-1,제로콜라-1/" +
+                    "<총혜택 금액>\n0원"})
+    @DisplayName("총혜택 금액을 출력한다.")
+    void printDiscountAmount(String value) {
+        // given
+        // strings[0] 은 사용자 입력 strings[1] 은 출력결과
+        String[] strings = value.split("/");
+        OrderItems testOrderItems = new OrderItems(strings[0].split(","));
+        Order order = new Order(testOrderItems, visitDate);
+
+        // when
+        OutputView.printDiscountAmount(discounts, order);
+
+        // then
+        String capturedOutput = outputStreamCaptor.toString().trim();
+        Assertions.assertThat(capturedOutput).isEqualTo(strings[1]);
+    }
 }

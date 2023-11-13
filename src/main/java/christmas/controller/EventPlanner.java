@@ -1,2 +1,7 @@
-package christmas.controller;public class EventPlanner {
+package christmas.controller;
+
+public class EventPlanner {
+    public void start() {
+
+    }
 }
