@@ -14,7 +14,18 @@ public class OrderItems {
     public OrderItems(String[] values) {
         items = new ArrayList<>();
         validateAndAddItems(values);
+        validateItemCounts();
         validateCategory();
+    }
+
+    private void validateItemCounts() {
+        if (exceedMaximumCount()) {
+            throw new IllegalArgumentException("[ERROR] 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다. 다시 입력해 주세요.");
+        }
+    }
+
+    private boolean exceedMaximumCount() {
+        return getOrderItemCountAmount() > 20;
     }
 
     private static boolean isNotAllowedInput(String[] parts) {
