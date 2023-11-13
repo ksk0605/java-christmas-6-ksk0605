@@ -35,7 +35,7 @@ public class OrderItems {
 
     private static void validateNotAllowedInput(String[] parts) {
         if (isNotAllowedInput(parts)) {
-            throw new IllegalArgumentException();
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
         }
     }
 
@@ -89,7 +89,7 @@ public class OrderItems {
         return amount;
     }
 
-    private void validateAndAddItems(String[] values) {
+    private void validateAndAddItems(String[] values) { // TODO : 라인 수 줄이기
         Set<MenuItem> seenItems = new HashSet<>();
 
         for (String value : values) {
@@ -98,12 +98,29 @@ public class OrderItems {
             validateNotAllowedInput(parts);
 
             String menuName = getMenuName(parts);
+
+            validateMenuCount(parts);
             int menuCount = getMenuCount(parts);
 
             MenuItem menuItem = MenuItem.fromName(menuName);
             validateDuplicateItem(seenItems, menuItem);
 
             items.add(createOrderItem(menuItem, menuCount));
+        }
+    }
+
+    private void validateMenuCount(String[] parts) {
+        if (isNotInteger(parts)) {
+            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+        }
+    }
+
+    private boolean isNotInteger(String[] parts) {
+        try {
+            Integer.parseInt(parts[1].trim());
+            return false;
+        } catch (NumberFormatException exception) {
+            return true;
         }
     }
 
