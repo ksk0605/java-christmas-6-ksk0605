@@ -8,7 +8,7 @@ import christmas.domain.order.OrderItems;
 import java.text.NumberFormat;
 import java.util.List;
 
-public class OutputView {
+public class OutputView { // TODO : 리팩토링
     public static void printMenu(Order order) {
         System.out.println("\n<주문 메뉴>");
         OrderItems orderItems = order.getOrderItems();
@@ -42,6 +42,15 @@ public class OutputView {
             }
             System.out.println(discount.getDiscountName() + ": -" + formatPrizeAmount(discountAmount) + "원");
         }
+    }
+
+    public static void printDiscountAmount(List<Discount> discounts, Order order) {
+        System.out.println("\n<총혜택 금액>");
+        int discountAmount = 0;
+        for (Discount discount : discounts) {
+            discountAmount -= discount.calculateDiscountAmount(order);
+        }
+        System.out.println(formatPrizeAmount(discountAmount) + "원");
     }
 
     private static boolean hasNoDiscount(List<Discount> discounts, Order order) {
