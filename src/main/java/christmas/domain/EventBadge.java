@@ -1,6 +1,7 @@
 package christmas.domain;
 
 import java.util.Arrays;
+import java.util.Optional;
 
 public enum EventBadge {
     별(5000),
@@ -17,10 +18,9 @@ public enum EventBadge {
         return minPurchaseAmount;
     }
 
-    public static EventBadge getBadgeForAmount(int purchaseAmount) {
+    public static Optional<EventBadge> getBadgeForAmount(int purchaseAmount) {
         return Arrays.stream(values())
                 .filter(badge -> purchaseAmount >= badge.getMinPurchaseAmount())
-                .reduce((first, second) -> second)
-                .orElse(null);
+                .reduce((first, second) -> second);
     }
 }

@@ -8,6 +8,7 @@ import christmas.domain.order.OrderItem;
 import christmas.domain.order.OrderItems;
 
 import java.text.NumberFormat;
+import java.util.Optional;
 
 public class OutputView { // TODO : 리팩토링
     public static void printMenu(Order order) {
@@ -64,12 +65,11 @@ public class OutputView { // TODO : 리팩토링
     public static void printEventBadge(Discounts discounts, Order order) {
         System.out.println("\n<12월 이벤트 배지>");
         int discountAmount = discounts.sumAllDiscounts(order);
-        EventBadge eventBadge = EventBadge.getBadgeForAmount(discountAmount);
-        if (eventBadge == null) {
-            System.out.println("없음");
-            return;
-        }
-        System.out.println(eventBadge);
+        Optional<EventBadge> eventBadge = EventBadge.getBadgeForAmount(discountAmount);
+        eventBadge.ifPresentOrElse(
+                badge -> System.out.println(badge),
+                () -> System.out.println("없음")
+        );
     }
 
     private static String createEventItem(Order order) { // TODO : 이벤트 아이템 enum으로 리팩토링
