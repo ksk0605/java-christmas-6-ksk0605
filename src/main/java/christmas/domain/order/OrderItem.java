@@ -17,20 +17,6 @@ public class OrderItem {
         this.menuCount = menuCount;
     }
 
-    private static boolean isOutOfRangeMenuCount(int menuCount) {
-        return menuCount < MINIMUM_ORDER_COUNT;
-    }
-
-    public static OrderItem from(MenuItem menuItem, int menuCount) {
-        return new OrderItem(menuItem, menuCount);
-    }
-
-    private void validateMenuCount(int count) {
-        if (isOutOfRangeMenuCount(count)) {
-            throw new IllegalOrderInputException(ErrorMessage.INVALID_ORDER);
-        }
-    }
-
     public MenuItem getMenuItem() {
         return menuItem;
     }
@@ -41,5 +27,19 @@ public class OrderItem {
 
     public MenuCategory getCategory() {
         return menuItem.getCategory();
+    }
+
+    public static OrderItem from(MenuItem menuItem, int menuCount) {
+        return new OrderItem(menuItem, menuCount);
+    }
+
+    private static boolean isOutOfRangeMenuCount(int menuCount) {
+        return menuCount < MINIMUM_ORDER_COUNT;
+    }
+
+    private void validateMenuCount(int count) {
+        if (isOutOfRangeMenuCount(count)) {
+            throw new IllegalOrderInputException(ErrorMessage.INVALID_ORDER);
+        }
     }
 }

@@ -101,7 +101,7 @@ public class OrderItems {
         return amount;
     }
 
-    public int getDessertOrderItemCountAmount() {
+    public int calculateDessertOrderItemCountAmount() {
         int amount = 0;
         for (OrderItem orderItem : items) {
             if (isDessert(orderItem)) {
@@ -115,7 +115,7 @@ public class OrderItems {
         return orderItem.getCategory().equals(MenuCategory.디저트);
     }
 
-    public int getMainOrderItemCountAmount() {
+    public int calculateMainOrderItemCountAmount() {
         int amount = 0;
         for (OrderItem orderItem : items) {
             if (isMain(orderItem)) {

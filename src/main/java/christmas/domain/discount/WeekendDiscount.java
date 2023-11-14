@@ -12,7 +12,7 @@ public class WeekendDiscount implements Discount {
     }
 
     private static int calculateAmount(Order order) {
-        return WEEKEND_DISCOUNT_PER_ORDER_ITEM * order.getMainOrderItemCountAmount();
+        return WEEKEND_DISCOUNT_PER_ORDER_ITEM * order.calculateMainOrderItemCountAmount();
     }
 
     @Override

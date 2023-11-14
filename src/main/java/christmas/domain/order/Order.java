@@ -2,7 +2,7 @@ package christmas.domain.order;
 
 import christmas.domain.VisitDate;
 
-public class Order { // TODO : 함수 네이밍 통일
+public class Order {
     private final OrderItems orderItems;
     private final VisitDate visitDate;
 
@@ -18,13 +18,13 @@ public class Order { // TODO : 함수 네이밍 통일
     public int getVisitDate() {
         return visitDate.getDate();
     }
-    
-    public int getMainOrderItemCountAmount() {
-        return orderItems.getMainOrderItemCountAmount();
+
+    public int calculateMainOrderItemCountAmount() {
+        return orderItems.calculateMainOrderItemCountAmount();
     }
 
-    public int getDessertOrderItemCountAmount() {
-        return orderItems.getDessertOrderItemCountAmount();
+    public int calculateDessertOrderItemCountAmount() {
+        return orderItems.calculateDessertOrderItemCountAmount();
     }
 
     public OrderItems getOrderItems() {

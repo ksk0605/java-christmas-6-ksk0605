@@ -14,6 +14,10 @@ public class VisitDate {
         this.date = toInt(value);
     }
 
+    public int getDate() {
+        return date;
+    }
+
     private static boolean isOutOfRangeInteger(int date) {
         return date < MIN_DATE || date > MAX_DATE;
     }
@@ -35,9 +39,5 @@ public class VisitDate {
 
     private int toInt(String value) {
         return Integer.parseInt(value);
-    }
-
-    public int getDate() {
-        return date;
     }
 }
