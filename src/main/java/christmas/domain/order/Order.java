@@ -18,11 +18,7 @@ public class Order { // TODO : 함수 네이밍 통일
     public int getVisitDate() {
         return visitDate.getDate();
     }
-
-    public int orderItemCounts() {
-        return orderItems.getOrderItemCountAmount();
-    }
-
+    
     public int getMainOrderItemCountAmount() {
         return orderItems.getMainOrderItemCountAmount();
     }
