@@ -2,10 +2,15 @@ package christmas.domain.discount;
 
 import christmas.domain.order.Order;
 
+import java.time.DayOfWeek;
+import java.time.LocalDate;
+
 public class WeekdayDiscount implements Discount {
 
     private static boolean isNotWeekDayDate(int visitDate) {
-        return visitDate % 7 == 1 || visitDate % 7 == 2;
+        LocalDate date = LocalDate.of(2023, 12, visitDate);
+        DayOfWeek dayOfWeek = date.getDayOfWeek();
+        return dayOfWeek == DayOfWeek.FRIDAY || dayOfWeek == DayOfWeek.SATURDAY;
     }
 
     private static int calculateAmount(Order order) {
