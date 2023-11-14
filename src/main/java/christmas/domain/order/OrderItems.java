@@ -137,7 +137,7 @@ public class OrderItems {
         return amount;
     }
 
-    private void validateAndAddItems(String[] values) { // TODO : 라인 수 줄이기
+    private void validateAndAddItems(String[] values) {
         Set<MenuItem> seenItems = new HashSet<>();
         for (String value : values) {
             String[] parts = splitByDash(value);
