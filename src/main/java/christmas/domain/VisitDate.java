@@ -1,5 +1,8 @@
 package christmas.domain;
 
+import christmas.exception.ErrorMessage;
+import christmas.exception.IllegalVisitDateInputException;
+
 public class VisitDate {
     private final int date;
 
@@ -14,7 +17,7 @@ public class VisitDate {
 
     private void validate(String value) {
         if (isNotInteger(value) || isOutOfRangeInteger(toInt(value))) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 날짜입니다. 다시 입력해 주세요.");
+            throw new IllegalVisitDateInputException(ErrorMessage.INVALID_DATE);
         }
     }
 
