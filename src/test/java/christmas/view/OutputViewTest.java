@@ -57,7 +57,11 @@ class OutputViewTest {
         Assertions.assertThat(capturedOutput).isEqualTo("<할인 전 총주문 금액>\n142,000원");
     }
 
-    @Test // TODO : 없음 테스트
+    @ParameterizedTest
+    @ValueSource(strings = {"티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1/" +
+            "<증정 메뉴>\n샴페인 1개",
+            "타파스-1,제로콜라-1/" +
+                    "<증정 메뉴>\n없음"})
     @DisplayName("증정 메뉴를 출력한다.")
     void printEventItem() {
         // given
