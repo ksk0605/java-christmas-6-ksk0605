@@ -1,5 +1,8 @@
 package christmas.domain.menu;
 
+import christmas.exception.ErrorMessage;
+import christmas.exception.IllegalOrderInputException;
+
 public enum MenuItem {
     // 애피타이저
     양송이수프(MenuCategory.애피타이저, 6_000),
@@ -30,7 +33,11 @@ public enum MenuItem {
     }
 
     public static MenuItem fromName(String name) {
-        return MenuItem.valueOf(name);
+        try {
+            return MenuItem.valueOf(name);
+        } catch (IllegalArgumentException e) {
+            throw new IllegalOrderInputException(ErrorMessage.INVALID_ORDER);
+        }
     }
 
     public MenuCategory getCategory() {
