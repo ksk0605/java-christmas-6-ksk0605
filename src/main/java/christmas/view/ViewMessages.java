@@ -19,4 +19,6 @@ public class ViewMessages {
     public static final String COLON_SPACE = ": ";
     public static final String WHITE_SPACE = " ";
 
+    private ViewMessages() {
+    }
 }
