@@ -27,7 +27,7 @@ public class OutputView {
         System.out.println(ORDER_MENU_HEADER);
         OrderItems orderItems = order.getOrderItems();
         for (OrderItem orderItem : orderItems.getItems()) {
-            System.out.println(orderItem.getMenuItem() + " " + orderItem.getMenuCount() + COUNT_SUFFIX);
+            System.out.println(orderItem.getMenuItem() + WHITE_SPACE + orderItem.getMenuCount() + COUNT_SUFFIX);
         }
     }
 
@@ -43,7 +43,7 @@ public class OutputView {
             System.out.println(NO_DISCOUNT_MESSAGE);
             return;
         }
-        System.out.println(eventItem + " " + eventItem.getItemCount() + COUNT_SUFFIX);
+        System.out.println(eventItem + WHITE_SPACE + eventItem.getItemCount() + COUNT_SUFFIX);
     }
 
     public static void printDiscountDetails(Discounts discounts, Order order) {
@@ -85,7 +85,7 @@ public class OutputView {
         Optional<EventBadge> eventBadge = EventBadge.getBadgeForAmount(discountAmount);
         eventBadge.ifPresentOrElse(
                 badge -> System.out.println(badge),
-                () -> System.out.println("없음")
+                () -> System.out.println(NO_DISCOUNT_MESSAGE)
         );
     }
 

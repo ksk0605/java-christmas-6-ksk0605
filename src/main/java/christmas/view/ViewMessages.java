@@ -17,5 +17,6 @@ public class ViewMessages {
     public static final String COUNT_SUFFIX = "개";
     public static final String MINUS_SIGN = "-";
     public static final String COLON_SPACE = ": ";
+    public static final String WHITE_SPACE = " ";
 
 }
