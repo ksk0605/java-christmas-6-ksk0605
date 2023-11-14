@@ -4,8 +4,10 @@ import christmas.domain.VisitDate;
 import christmas.domain.discount.Discounts;
 import christmas.domain.order.Order;
 import christmas.domain.order.OrderItems;
-import christmas.view.InputView;
-import christmas.view.OutputView;
+
+import static christmas.view.InputView.readDate;
+import static christmas.view.InputView.readOrderItems;
+import static christmas.view.OutputView.*;
 
 public class EventPlanner {
     private final Discounts discounts;
@@ -19,20 +21,20 @@ public class EventPlanner {
 
         Order order = createOrder(visitDate);
 
-        OutputView.printEventHeader(visitDate);
-        OutputView.printMenu(order);
-        OutputView.printOrderAmount(order);
-        OutputView.printEventItem(order);
-        OutputView.printDiscountDetails(discounts, order);
-        OutputView.printDiscountAmount(discounts, order);
-        OutputView.printExpectedPaymentAmount(discounts, order);
-        OutputView.printEventBadge(discounts, order);
+        printEventHeader(visitDate);
+        printMenu(order);
+        printOrderAmount(order);
+        printEventItem(order);
+        printDiscountDetails(discounts, order);
+        printDiscountAmount(discounts, order);
+        printExpectedPaymentAmount(discounts, order);
+        printEventBadge(discounts, order);
     }
 
     private static Order createOrder(VisitDate visitDate) {
         while (true) {
             try {
-                OrderItems orderItems = InputView.readOrderItems();
+                OrderItems orderItems = readOrderItems();
                 return new Order(orderItems, visitDate);
             } catch (IllegalArgumentException exception) {
                 System.out.println(exception.getMessage());
@@ -43,7 +45,7 @@ public class EventPlanner {
     private static VisitDate createVisitDate() {
         while (true) {
             try {
-                return InputView.readDate();
+                return readDate();
             } catch (IllegalArgumentException exception) {
                 System.out.println(exception.getMessage());
             }
