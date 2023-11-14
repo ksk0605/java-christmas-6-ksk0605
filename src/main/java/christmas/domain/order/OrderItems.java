@@ -10,6 +10,8 @@ import java.util.HashSet;
 import java.util.List;
 import java.util.Set;
 
+import static christmas.constants.EventConstants.MAXIMUM_ORDER_COUNT;
+
 public class OrderItems {
     private final List<OrderItem> items;
 
@@ -48,7 +50,7 @@ public class OrderItems {
     }
 
     private boolean exceedMaximumCount() {
-        return getOrderItemCountAmount() > 20;
+        return getOrderItemCountAmount() > MAXIMUM_ORDER_COUNT;
     }
 
     private boolean isInvalidMenuFormat(String[] parts) {

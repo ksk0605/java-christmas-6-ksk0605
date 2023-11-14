@@ -1,23 +1,26 @@
 package christmas.domain.discount;
 
+import christmas.domain.event.EventItem;
 import christmas.domain.order.Order;
+
+import static christmas.constants.EventConstants.*;
 
 public class EventDiscount implements Discount {
 
     private static boolean isNotEligibleForEvent(Order order) {
-        return order.calculateOrderAmount() < 120000;
+        return order.calculateOrderAmount() < EVENT_MINIMUM_DISCOUNT_AMOUNT;
     }
 
     @Override
     public int calculateDiscountAmount(Order order) {
         if (isNotSatisfiedMinimumAmount(order) || isNotEligibleForEvent(order)) {
-            return 0;
+            return ZERO_DISCOUNT;
         }
-        return 25000; // TODO : static 상수 분리
+        return EventItem.샴페인.getItemPrice();
     }
 
     @Override
     public String getDiscountName() {
-        return "증정 이벤트";
+        return EVENT_DISCOUNT_NAME;
     }
 }

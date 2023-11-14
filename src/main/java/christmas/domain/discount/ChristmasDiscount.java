@@ -2,13 +2,16 @@ package christmas.domain.discount;
 
 import christmas.domain.order.Order;
 
+import static christmas.constants.EventConstants.*;
+
 public class ChristmasDiscount implements Discount {
     private static boolean isNotDiscountDate(int visitDate) {
-        return visitDate > 25;
+        return visitDate > CHRISTMAS_DISCOUNT_DAY_THRESHOLD;
     }
 
     private static int calculateAmount(int visitDate) {
-        return 1000 + (100 * (visitDate - 1));
+        int daysSinceFirstDay = visitDate - 1;
+        return CHRISTMAS_MINIMUM_DISCOUNT_AMOUNT + (CHRISTMAS_DISCOUNT_PER_DAY * (daysSinceFirstDay));
     }
 
     @Override
@@ -16,7 +19,7 @@ public class ChristmasDiscount implements Discount {
         int visitDate = order.getVisitDate();
 
         if (isNotSatisfiedMinimumAmount(order) || isNotDiscountDate(visitDate)) {
-            return 0;
+            return ZERO_DISCOUNT;
         }
 
         return calculateAmount(visitDate);
@@ -24,6 +27,6 @@ public class ChristmasDiscount implements Discount {
 
     @Override
     public String getDiscountName() {
-        return "크리스마스 디데이 할인";
+        return CHRISTMAS_DISCOUNT_NAME;
     }
 }

@@ -3,6 +3,8 @@ package christmas.domain.discount;
 import christmas.domain.order.Order;
 import christmas.util.WeekdayWeekendChecker;
 
+import static christmas.constants.EventConstants.*;
+
 public class WeekdayDiscount implements Discount {
 
     private static boolean isWeekend(int visitDate) {
@@ -10,7 +12,7 @@ public class WeekdayDiscount implements Discount {
     }
 
     private static int calculateAmount(Order order) {
-        return 2023 * order.getDessertOrderItemCountAmount();
+        return WEEKDAY_DISCOUNT_PER_ORDER_ITEM * order.getDessertOrderItemCountAmount();
     }
 
     @Override
@@ -18,7 +20,7 @@ public class WeekdayDiscount implements Discount {
         int visitDate = order.getVisitDate();
 
         if (isNotSatisfiedMinimumAmount(order) || isWeekend(visitDate)) {
-            return 0;
+            return ZERO_DISCOUNT;
         }
 
         return calculateAmount(order);
@@ -26,6 +28,6 @@ public class WeekdayDiscount implements Discount {
 
     @Override
     public String getDiscountName() {
-        return "평일 할인";
+        return WEEKDAY_DISCOUNT_NAME;
     }
 }

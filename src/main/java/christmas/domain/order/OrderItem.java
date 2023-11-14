@@ -5,6 +5,8 @@ import christmas.domain.menu.MenuItem;
 import christmas.exception.ErrorMessage;
 import christmas.exception.IllegalOrderInputException;
 
+import static christmas.constants.EventConstants.MINIMUM_ORDER_COUNT;
+
 public class OrderItem {
     private final MenuItem menuItem;
     private final int menuCount;
@@ -16,7 +18,7 @@ public class OrderItem {
     }
 
     private static boolean isOutOfRangeMenuCount(int menuCount) {
-        return menuCount < 1;
+        return menuCount < MINIMUM_ORDER_COUNT;
     }
 
     public static OrderItem from(MenuItem menuItem, int menuCount) {

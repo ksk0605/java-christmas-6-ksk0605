@@ -3,6 +3,9 @@ package christmas.domain;
 import christmas.exception.ErrorMessage;
 import christmas.exception.IllegalVisitDateInputException;
 
+import static christmas.constants.EventConstants.MAX_DATE;
+import static christmas.constants.EventConstants.MIN_DATE;
+
 public class VisitDate {
     private final int date;
 
@@ -12,7 +15,7 @@ public class VisitDate {
     }
 
     private static boolean isOutOfRangeInteger(int date) {
-        return date < 1 || date > 31;
+        return date < MIN_DATE || date > MAX_DATE;
     }
 
     private void validate(String value) {

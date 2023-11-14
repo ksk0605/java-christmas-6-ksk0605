@@ -5,6 +5,8 @@ import christmas.domain.order.Order;
 import java.util.ArrayList;
 import java.util.List;
 
+import static christmas.constants.EventConstants.ZERO_DISCOUNT;
+
 public class Discounts {
     private final List<Discount> discounts;
 
@@ -27,7 +29,7 @@ public class Discounts {
 
     public boolean allDiscountsZero(Order order) {
         return discounts.stream()
-                .allMatch(discount -> discount.calculateDiscountAmount(order) == 0);
+                .allMatch(discount -> discount.calculateDiscountAmount(order) == ZERO_DISCOUNT);
     }
 
     public int sumAllDiscounts(Order order) {
