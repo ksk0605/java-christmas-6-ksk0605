@@ -4,11 +4,11 @@ import camp.nextstep.edu.missionutils.Console;
 import christmas.domain.VisitDate;
 import christmas.domain.order.OrderItems;
 
-import static christmas.view.ViewMessages.*;
+import static christmas.view.ViewMessages.ENTER_VISIT_DATE_PROMPT;
+import static christmas.view.ViewMessages.ORDER_MENU_PROMPT;
 
 public class InputView {
     public static VisitDate readDate() {
-        System.out.println(WELCOME_MESSAGE);
         System.out.println(ENTER_VISIT_DATE_PROMPT);
         String input = createUserInput();
         return new VisitDate(input);

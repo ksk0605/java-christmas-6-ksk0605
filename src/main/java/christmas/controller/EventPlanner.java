@@ -8,6 +8,8 @@ import christmas.domain.order.OrderItems;
 import static christmas.view.InputView.readDate;
 import static christmas.view.InputView.readOrderItems;
 import static christmas.view.OutputView.*;
+import static christmas.view.StaticHeaderView.printEventHeader;
+import static christmas.view.StaticHeaderView.printWelcomeMessage;
 
 public class EventPlanner {
     private final Discounts discounts;
@@ -17,8 +19,9 @@ public class EventPlanner {
     }
 
     public void start() {
-        VisitDate visitDate = createVisitDate();
+        printWelcomeMessage();
 
+        VisitDate visitDate = createVisitDate();
         Order order = createOrder(visitDate);
 
         printEventHeader(visitDate);

@@ -1,6 +1,5 @@
 package christmas.view;
 
-import christmas.domain.VisitDate;
 import christmas.domain.discount.Discount;
 import christmas.domain.discount.Discounts;
 import christmas.domain.event.EventBadge;
@@ -15,14 +14,6 @@ import java.util.Optional;
 import static christmas.view.ViewMessages.*;
 
 public class OutputView {
-    public static void printEventHeader(VisitDate visitDate) {
-        System.out.println(formatDate(visitDate));
-    }
-
-    private static String formatDate(VisitDate visitDate) {
-        return String.format(EVENT_PREVIEW_HEADER, visitDate.getDate());
-    }
-
     public static void printMenu(Order order) {
         System.out.println(ORDER_MENU_HEADER);
         OrderItems orderItems = order.getOrderItems();
