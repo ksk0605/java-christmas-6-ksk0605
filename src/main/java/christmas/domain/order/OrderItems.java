@@ -2,6 +2,8 @@ package christmas.domain.order;
 
 import christmas.domain.menu.MenuCategory;
 import christmas.domain.menu.MenuItem;
+import christmas.exception.ErrorMessage;
+import christmas.exception.IllegalOrderInputException;
 
 import java.util.ArrayList;
 import java.util.HashSet;
@@ -21,14 +23,14 @@ public class OrderItems {
 
     private void validateItemCounts() {
         if (exceedMaximumCount()) {
-            throw new IllegalArgumentException("[ERROR] 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다. 다시 입력해 주세요.");
+            throw new IllegalOrderInputException(ErrorMessage.MAX_ORDER_COUNT_EXCEEDED);
         }
     }
 
     private void validateInput(String input) {
         String[] values = splitByComma(input);
         if (hasDuplicateComma(input) || isInvalidInputOrder(values)) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new IllegalOrderInputException(ErrorMessage.INVALID_ORDER);
         }
     }
 
@@ -71,13 +73,13 @@ public class OrderItems {
 
     private void validateMenuFormat(String[] parts) {
         if (isInvalidMenuFormat(parts)) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new IllegalOrderInputException(ErrorMessage.INVALID_ORDER);
         }
     }
 
     private void validateDuplicateItem(Set<MenuItem> seenItems, MenuItem menuItem) {
         if (hasDuplicateItems(seenItems, menuItem)) {
-            throw new IllegalArgumentException(); // TODO 메시지 추가
+            throw new IllegalOrderInputException(ErrorMessage.INVALID_ORDER);
         }
     }
 
@@ -152,7 +154,7 @@ public class OrderItems {
 
     private void validateMenuCount(String[] parts) {
         if (isNotInteger(parts)) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new IllegalOrderInputException(ErrorMessage.INVALID_ORDER);
         }
     }
 
@@ -172,7 +174,7 @@ public class OrderItems {
         }
 
         if (categories.size() == 1 && categories.contains(MenuCategory.음료)) {
-            throw new IllegalArgumentException();
+            throw new IllegalOrderInputException(ErrorMessage.INVALID_ORDER);
         }
     }
 

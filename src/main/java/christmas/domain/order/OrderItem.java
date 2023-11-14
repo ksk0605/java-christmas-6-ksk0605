@@ -2,6 +2,8 @@ package christmas.domain.order;
 
 import christmas.domain.menu.MenuCategory;
 import christmas.domain.menu.MenuItem;
+import christmas.exception.ErrorMessage;
+import christmas.exception.IllegalOrderInputException;
 
 public class OrderItem {
     private final MenuItem menuItem;
@@ -23,7 +25,7 @@ public class OrderItem {
 
     private void validateMenuCount(int count) {
         if (isOutOfRangeMenuCount(count)) {
-            throw new IllegalArgumentException("[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.");
+            throw new IllegalOrderInputException(ErrorMessage.INVALID_ORDER);
         }
     }
 
