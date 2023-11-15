@@ -1,7 +1,6 @@
 package christmas;
 
 import camp.nextstep.edu.missionutils.test.NsTest;
-import org.junit.jupiter.api.Test;
 import org.junit.jupiter.params.ParameterizedTest;
 import org.junit.jupiter.params.provider.CsvSource;
 import org.junit.jupiter.params.provider.ValueSource;
@@ -12,10 +11,11 @@ import static org.assertj.core.api.Assertions.assertThat;
 class ApplicationTest extends NsTest {
     private static final String LINE_SEPARATOR = System.lineSeparator();
 
-    @Test
-    void 모든_타이틀_출력() {
+    @ParameterizedTest
+    @CsvSource(value = {"3:티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1", "8:티본스테이크-1,바비큐립-1"}, delimiter = ':')
+    void 모든_타이틀_출력(String date, String order) {
         assertSimpleTest(() -> {
-            run("3", "티본스테이크-1,바비큐립-1,초코케이크-2,제로콜라-1");
+            run(date, order);
             assertThat(output()).contains(
                     "<주문 메뉴>",
                     "<할인 전 총주문 금액>",
@@ -56,7 +56,8 @@ class ApplicationTest extends NsTest {
             "3:제로콜라-0:[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.",
             "3:제로콜라-21:[ERROR] 메뉴는 한 번에 최대 20개까지만 주문할 수 있습니다. 다시 입력해 주세요.",
             "3:제로콜라--2:[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.",
-            "3:제로콜라/2:[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요."
+            "3:제로콜라/2:[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요.",
+            "3:'\n':[ERROR] 유효하지 않은 주문입니다. 다시 입력해 주세요."
     }, delimiter = ':')
     void 주문_예외_테스트(String date, String order, String errorMessage) {
         assertSimpleTest(() -> {
