@@ -1,5 +1,6 @@
 package christmas.controller;
 
+import camp.nextstep.edu.missionutils.Console;
 import christmas.domain.VisitDate;
 import christmas.domain.discount.Discounts;
 import christmas.domain.order.Order;
@@ -34,12 +35,16 @@ public class EventPlanner {
         printEventBadge(discounts, order);
     }
 
-    private static Order createOrder(VisitDate visitDate) {
+    public void finish() {
+        Console.close();
+    }
+
+    private Order createOrder(VisitDate visitDate) {
         OrderItems orderItems = InputHandler.createWithRetry(InputView::readOrderItems);
         return new Order(orderItems, visitDate);
     }
 
-    private static VisitDate createVisitDate() {
+    private VisitDate createVisitDate() {
         return InputHandler.createWithRetry(InputView::readDate);
     }
 }

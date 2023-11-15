@@ -9,5 +9,6 @@ public class Application {
 
         EventPlanner eventPlanner = new EventPlanner(discounts);
         eventPlanner.start();
+        eventPlanner.finish();
     }
 }
