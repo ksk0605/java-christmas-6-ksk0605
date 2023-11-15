@@ -20,12 +20,19 @@ public class EventPlanner {
     }
 
     public void start() {
+        // 웰컴 메시지 출력
         printWelcomeMessage();
 
+        // 사용자 입력
         VisitDate visitDate = createVisitDate();
         Order order = createOrder(visitDate);
 
+        // 결과 출력
         printEventHeader(visitDate);
+        printResult(order);
+    }
+
+    private void printResult(Order order) {
         printMenu(order);
         printOrderAmount(order);
         printEventItem(order);
