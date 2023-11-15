@@ -4,9 +4,9 @@ import christmas.domain.VisitDate;
 import christmas.domain.discount.Discounts;
 import christmas.domain.order.Order;
 import christmas.domain.order.OrderItems;
+import christmas.handler.InputHandler;
+import christmas.view.InputView;
 
-import static christmas.view.InputView.readDate;
-import static christmas.view.InputView.readOrderItems;
 import static christmas.view.OutputView.*;
 import static christmas.view.StaticHeaderView.printEventHeader;
 import static christmas.view.StaticHeaderView.printWelcomeMessage;
@@ -35,23 +35,11 @@ public class EventPlanner {
     }
 
     private static Order createOrder(VisitDate visitDate) {
-        while (true) {
-            try {
-                OrderItems orderItems = readOrderItems();
-                return new Order(orderItems, visitDate);
-            } catch (IllegalArgumentException exception) {
-                System.out.println(exception.getMessage());
-            }
-        }
+        OrderItems orderItems = InputHandler.createWithRetry(InputView::readOrderItems);
+        return new Order(orderItems, visitDate);
     }
 
     private static VisitDate createVisitDate() {
-        while (true) {
-            try {
-                return readDate();
-            } catch (IllegalArgumentException exception) {
-                System.out.println(exception.getMessage());
-            }
-        }
+        return InputHandler.createWithRetry(InputView::readDate);
     }
 }
