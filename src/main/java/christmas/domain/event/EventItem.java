@@ -1,17 +1,19 @@
 package christmas.domain.event;
 
-import static christmas.constants.EventConstants.EVENT_MINIMUM_DISCOUNT_AMOUNT;
+import java.util.Arrays;
 
 public enum EventItem {
-    샴페인(1, 25000),
-    없음(0, 0);
+    샴페인(1, 25000, 120000),
+    없음(0, 0, 0);
 
     final int itemCount;
     final int itemPrice;
+    final int minPurchaseAmount;
 
-    EventItem(int itemCount, int itemPrice) {
+    EventItem(int itemCount, int itemPrice, int minPurchaseAmount) {
         this.itemCount = itemCount;
         this.itemPrice = itemPrice;
+        this.minPurchaseAmount = minPurchaseAmount;
     }
 
     public int getItemCount() {
@@ -23,9 +25,9 @@ public enum EventItem {
     }
 
     public static EventItem from(int orderAmount) {
-        if (orderAmount < EVENT_MINIMUM_DISCOUNT_AMOUNT) {
-            return EventItem.없음;
-        }
-        return EventItem.샴페인;
+        return Arrays.stream(values())
+                .filter(item -> orderAmount >= item.minPurchaseAmount)
+                .findFirst()
+                .orElse(없음);
     }
 }
