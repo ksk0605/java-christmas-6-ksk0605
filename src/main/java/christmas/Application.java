@@ -1,7 +1,14 @@
 package christmas;
 
+import christmas.controller.EventPlanner;
+import christmas.domain.discount.Discounts;
+
 public class Application {
     public static void main(String[] args) {
-        // TODO: 프로그램 구현
+        Discounts discounts = new Discounts();
+
+        EventPlanner eventPlanner = new EventPlanner(discounts);
+        eventPlanner.start();
+        eventPlanner.finish();
     }
 }
